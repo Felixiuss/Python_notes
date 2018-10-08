@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+
 # def makebold(fn):
 #     def wrapped():
 #         return "<b>" + fn() + "</b>"
@@ -17,10 +18,10 @@
 # @makebold
 # @makeitalic
 # def hello():
-#     return "hello habr"
+#     return "hello Roman"
 #
 #
-# print hello()  ## выведет <b><i>hello habr</i></b>
+# print(hello())  # выведет <b><i>hello habr</i></b>
 
 # # ---------------------------------------------------
 
@@ -28,60 +29,55 @@
 #     return word.capitalize() + "!"
 #
 #
-# print shout()
-# # выведет: 'Да!'
+# print(shout())  # выведет: 'Да!'
 #
-# # Так как функция - это объект, вы связать её с переменнной,
-# # как и любой другой объект
+# # Так как функция - это объект, вы можете связать её с переменнной, как и любой другой объект
 # scream = shout
 #
 # # Заметьте, что мы не используем скобок: мы НЕ вызываем функцию "shout",
 # # мы связываем её с переменной "scream". Это означает, что теперь мы
 # # можем вызывать "shout" через "scream":
 #
-# print scream()
-# # выведет: 'Да!'
+# print(scream())  # выведет: 'Да!'
 #
 # # Более того, это значит, что мы можем удалить "shout", и функция всё ещё
 # # будет доступна через переменную "scream"
 #
 # del shout
-# try:
-#     print shout()
-# except NameError, e:
-#     print e
-#     # выведет: "name 'shout' is not defined"
 #
-# print scream()
+# try:
+#     print(shout())
+# except NameError as e:
+#     print(e)  # выведет: "name 'shout' is not defined"
+#
+# print(scream())
+#
+# # выведет: 'Да!'
 
-# выведет: 'Да!'
+# ----------------------------------------------------
 
-# # /----------------------------------------------------
 
 # def talk():
 #     # Внутри определения функции "talk" мы можем определить другую...
 #     def whisper(word="да"):
-#         return word.lower() + "...";
+#         return word.lower() + "..."
 #
 #     # ... и сразу же её использовать!
-#     print whisper()
+#     print(whisper())
 #
 #
-# # Теперь, КАЖДЫЙ РАЗ при вызове "talk", внутри неё определяется а затем
-# # и вызывается функция "whisper".
-# talk()
-# # выведет: "да..."
+# # Теперь, КАЖДЫЙ РАЗ при вызове "talk", внутри неё определяется а затем и вызывается функция "whisper".
+# talk()  # выведет: "да..."
 #
 # # Но вне функции "talk" НЕ существует никакой функции "whisper":
 # try:
-#     print whisper()
-# except NameError, e:
-#     print e
-#     # выведет : "name 'whisper' is not defined"
+#     print(whisper())
+# except NameError as e:
+#     print(e, ': Функции с таким именем не существует')  # выведет : "name 'whisper' is not defined"
 
 # ----------------------------------------------------
 
-# def getTalk(type="shout"):
+# def get_talk(type="shout"):
 #     # Мы определяем функции прямо здесь
 #     def shout(word="да"):
 #         return word.capitalize() + "!"
@@ -91,26 +87,22 @@
 #
 #     # Затем возвращаем необходимую
 #     if type == "shout":
-#         # Заметьте, что мы НЕ используем "()", нам нужно не вызвать функцию,
-#         # а вернуть объект функции
+#         # Заметьте, что мы НЕ используем "()", нам нужно не вызвать функцию, а вернуть объект функции
 #         return shout
 #     else:
 #         return whisper
 #
 #
-# # Как использовать это непонятное нечто?
-# # Возьмём функцию и свяжем её с переменной
-# talk = getTalk()
+# # Как использовать это непонятное нечто? Возьмём функцию и свяжем её с переменной
+# talk = get_talk()  # Как мы можем видеть, "talk" теперь - объект "function":
 #
-# # Как мы можем видеть, "talk" теперь - объект "function":
-# print talk
-# # выведет: <function shout at 0xb7ea817c>
+# print(talk)  # выведет: <function shout at 0xb7ea817c>
 #
 # # Который можно вызывать, как и функцию, определённую "обычным образом":
-# print talk()
+# print(talk())
 #
 # # Если нам захочется - можно вызвать её напрямую из возвращаемого значения:
-# print getTalk("whisper")()
+# print(get_talk("whisper")())
 
 # ------------------------------------------------------------------------------
 
@@ -122,8 +114,8 @@
 #
 #
 # def doSomethingBefore(func):
-#     print "Я делаю что-то ещё, перед тем как вызвать функцию, которую ты мне передал"
-#     print func()
+#     print("Я делаю что-то ещё, перед тем как вызвать функцию, которую ты мне передал")
+#     print(func())
 #
 #
 # doSomethingBefore(scream)
@@ -135,96 +127,93 @@
 
 # # Декоратор - это функция, ожидающая ДРУГУЮ функцию в качестве параметра
 # def my_shiny_new_decorator(a_function_to_decorate):
-#     # Внутри себя декоратор определяет функцию-"обёртку".
-#     # Она будет (что бы вы думали?..) обёрнута вокруг декорируемой,
-#     # получая возможность исполнять произвольный код до и после неё.
+#     # Внутри себя декоратор определяет функцию-"обёртку". Она будет (что бы вы думали?..) обёрнута вокруг
+#     # декорируемой, получая возможность исполнять произвольный код до и после неё.
 #
 #     def the_wrapper_around_the_original_function():
-#         # Поместим здесь код, который мы хотим запускать ДО вызова
-#         # оригинальной функции
-#         print "Я - код, который отработает до вызова функции"
+#         # Поместим здесь код, который мы хотим запускать ДО вызова оригинальной функции
+#         print("Я - код, который отработает до вызова функции")
 #
 #         # ВЫЗОВЕМ саму декорируемую функцию
 #         a_function_to_decorate()
 #
-#         # А здесь поместим код, который мы хотим запускать ПОСЛЕ вызова
-#         # оригинальной функции
-#         print "А я - код, срабатывающий после"
+#         # А здесь поместим код, который мы хотим запускать ПОСЛЕ вызова оригинальной функции
+#         print("А я - код, срабатывающий после", end='\n\n')
 #
 #     # На данный момент функция "a_function_to_decorate" НЕ ВЫЗЫВАЛАСЬ НИ РАЗУ
 #
-#     # Теперь, вернём функцию-обёртку, которая содержит в себе
-#     # декорируемую функцию, и код, который необходимо выполнить до и после.
-#     # Всё просто!
+#     # Теперь, вернём функцию-обёртку, которая содержит в себе декорируемую функцию, и код,
+#     # который необходимо выполнить до и после. Всё просто!
 #     return the_wrapper_around_the_original_function
 #
 #
 # # Представим теперь, что у нас есть функция, которую мы не планируем больше трогать.
 # def a_stand_alone_function():
-#     print "Я простая одинокая функция, ты ведь не посмеешь меня изменять?.."
+#     print("Я простая одинокая функция, ты ведь не посмеешь меня изменять?..")
 #
 #
-# a_stand_alone_function()
-# # выведет: Я простая одинокая функция, ты ведь не посмеешь меня изменять?..
+# a_stand_alone_function()  # выведет: Я простая одинокая функция, ты ведь не посмеешь меня изменять?..
 #
-# # Однако, чтобы изменить её поведение, мы можем декорировать её, то есть
-# # Просто передать декоратору, который обернет исходную функцию в любой код,
-# # который нам потребуется, и вернёт новую, готовую к использованию функцию:
+# # Однако, чтобы изменить её поведение, мы можем декорировать её, то есть Просто передать декоратору, который
+# # обернет исходную функцию в любой код, который нам потребуется, и вернёт новую, готовую к использованию функцию:
 #
 # a_stand_alone_function_decorated = my_shiny_new_decorator(a_stand_alone_function)
-# a_stand_alone_function_decorated()
-# # выведет:
+# a_stand_alone_function_decorated()  # выведет:
+#
 # # Я - код, который отработает до вызова функции
 # # Я простая одинокая функция, ты ведь не посмеешь меня изменять?..
 # # А я - код, срабатывающий после
 #
+# #
+
 # # Наверное, теперь мы бы хотели, чтобы каждый раз, во время вызова a_stand_alone_function, вместо неё вызывалась
 # # a_stand_alone_function_decorated. Нет ничего проще, просто перезапишем a_stand_alone_function функцией, которую
 # # нам вернул my_shiny_new_decorator:
 #
 # a_stand_alone_function = my_shiny_new_decorator(a_stand_alone_function)
-# a_stand_alone_function()
-# #выведет:
+# a_stand_alone_function()  # выведет:
+#
 # # Я - код, который отработает до вызова функции
 # # Я простая одинокая функция, ты ведь не посмеешь меня изменять?..
 # # А я - код, срабатывающий после
 #
+# #
+#
+#
 # @my_shiny_new_decorator
 # def another_stand_alone_function():
-#     print "Оставь меня в покое"
+#     print("Оставь меня в покое")
 #
 #
-# another_stand_alone_function()
-# # выведет:
+# another_stand_alone_function()  # выведет:
+#
 # # Я - код, который отработает до вызова функции
 # # Оставь меня в покое
 # # А я - код, срабатывающий после
 
 # -------------------------------------------------------------------------
 
-# Конечно, можно вкладывать декораторы друг в друга, например так:
-
-
+# # Конечно, можно вкладывать декораторы друг в друга, например так:
 # def bread(func):
 #     def wrapper():
-#         print "</------\>"
+#         print("</------\>")
 #         func()
-#         print "<\______/>"
+#         print("<\______/>")
 #
 #     return wrapper
 #
 #
 # def ingredients(func):
 #     def wrapper():
-#         print "#помидоры#"
+#         print("#помидоры#")
 #         func()
-#         print "~салат~"
+#         print("~салат~")
 #
 #     return wrapper
 #
 #
 # def sandwich(food="--ветчина--"):
-#     print food
+#     print(food)
 #
 #
 # sandwich()
@@ -237,34 +226,33 @@
 # # --ветчина--
 # # ~салат~
 # # <\______/>
-#
-#
+# #
+# #
 # # И используя синтаксис декораторов:
+#
 #
 # @bread
 # @ingredients
 # def sandwich(food="--ветчина--"):
-#     print food
+#     print(food)
 #
 #
 # sandwich()
-# # выведет:
-# # </------\>
-# # #помидоры#
-# # --ветчина--
-# # ~салат~
-# # <\______/>
-#
-#
+# выведет:
+# </------\>
+# #помидоры#
+# --ветчина--
+# ~салат~
+# <\______/>
+
+
 # # Следует помнить о том, что порядок декорирования ВАЖЕН:
-#
-#
+
 # @ingredients
 # @bread
 # def sandwich(food="--ветчина--"):
 #     print food
-#
-#
+
 # sandwich()
 # # выведет:
 # # #помидоры#
@@ -283,7 +271,7 @@
 #
 # def a_decorator_passing_arguments(function_to_decorate):
 #     def a_wrapper_accepting_arguments(arg1, arg2):  # аргументы прибывают отсюда
-#         print "Смотри, что я получил:", arg1, arg2
+#         print("Смотри, что я получил:", arg1, arg2)
 #         function_to_decorate(arg1, arg2)
 #
 #     return a_wrapper_accepting_arguments
@@ -295,7 +283,7 @@
 #
 # @a_decorator_passing_arguments
 # def print_full_name(first_name, last_name):
-#     print "Меня зовут", first_name, last_name
+#     print("Меня зовут", first_name, last_name)
 #
 #
 # print_full_name("Питер", "Венкман")
@@ -319,22 +307,21 @@
 #         self.age = 32
 #
 #     @method_friendly_decorator
-#     def sayYourAge(self, lie):
-#         print "Мне {}, а ты бы сколько дал?".format(self.age + lie)
+#     def say_your_age(self, lie):
+#         print("Мне {}, а ты бы сколько дал?".format(self.age + lie))
 #
 #
 # l = Lucy()
-# l.sayYourAge(10)
-# # выведет: Мне 39, а ты бы сколько дал?
+# l.say_your_age(10)  # выведет: Мне 39, а ты бы сколько дал?
 
 # ----------------------------------------------------------------------------------------
 
 # def a_decorator_passing_arbitrary_arguments(function_to_decorate):
 #     # Данная "обёртка" принимает любые аргументы
 #     def a_wrapper_accepting_arbitrary_arguments(*args, **kwargs):
-#         print "Передали ли мне что-нибудь?:"
-#         print args
-#         print kwargs
+#         print("Передали ли мне что-нибудь?:")
+#         print(args)
+#         print(kwargs)
 #         # Теперь мы распакуем *args и **kwargs
 #         # Если вы не слишком хорошо знакомы с распаковкой, можете прочесть следующую статью:
 #         # http://www.saltycrane.com/blog/2008/01/how-to-use-args-and-kwargs-in-python/
@@ -345,7 +332,7 @@
 #
 # @a_decorator_passing_arbitrary_arguments
 # def function_with_no_argument():
-#     print "Python is cool, no argument here."  # оставлено без перевода, хорошая игра слов:)
+#     print("Python is cool, no argument here.")  # оставлено без перевода, хорошая игра слов:)
 #
 #
 # function_with_no_argument()
@@ -359,12 +346,12 @@
 #
 # @a_decorator_passing_arbitrary_arguments
 # def function_with_arguments(a, b, c):
-#     print a, b, c
+#     print(a, b, c)
 #
 #
 # function_with_arguments(1, 2, 3)
 #
-#
+
 # # выведет:
 # # Передали ли мне что-нибудь?:
 # # (1, 2, 3)
@@ -373,8 +360,7 @@
 #
 # @a_decorator_passing_arbitrary_arguments
 # def function_with_named_arguments(a, b, c, platypus="Почему нет?"):
-#     print "Любят ли %s, %s и %s утконосов? %s" % \
-#           (a, b, c, platypus)
+#     print("Любят ли {}, {} и {} утконосов? {}".format(a, b, c, platypus))
 #
 #
 # function_with_named_arguments("Билл", "Линус", "Стив", platypus="Определенно!")
@@ -393,7 +379,7 @@
 #
 #     @a_decorator_passing_arbitrary_arguments
 #     def sayYourAge(self, lie=-3):  # Теперь мы можем указать значение по умолчанию
-#         print "Мне %s, а ты бы сколько дал?" % (self.age + lie)
+#         print("Мне {}, а ты бы сколько дал?".format(self.age + lie))
 #
 #
 # m = Mary()
@@ -408,10 +394,10 @@
 
 # # Декораторы - это просто функции
 # def my_decorator(func):
-#     print "Я обычная функция"
+#     print("Я обычная функция")
 #
 #     def wrapper():
-#         print "Я - функция, возвращаемая декоратором"
+#         print("Я - функция, возвращаемая декоратором")
 #         func()
 #
 #     return wrapper
@@ -420,20 +406,18 @@
 # # Так что, мы можем вызывать её, не используя "@"-синтаксис:
 #
 # def lazy_function():
-#     print "zzzzzzzz"
+#     print("zzzzzzzz")
 #
 #
-# decorated_function = my_decorator(lazy_function)
-#
-#
-# # выведет: Я обычная функция
+# decorated_function = my_decorator(lazy_function)  # выведет: Я обычная функция
 #
 # # Данный код выводит "Я обычная функция", потому что это ровно то, что мы сделали:
 # # вызвали функцию. Ничего сверхъестественного
 #
+#
 # @my_decorator
 # def lazy_function():
-#     print "zzzzzzzz"
+#     print("zzzzzzzz")
 #
 # # выведет: Я обычная функция
 
@@ -619,3 +603,47 @@
 #     "A man, a plan, a canoe, pasta, heros, rajahs, a coloratura, maps, snipe, percale, macaroni, a gag, a banana bag,"
 #     " a tan, a tag, a banana bag again (or a camel), a crepe, pins, Spam, a rut, a Rolo, cash, a jar, sore hats,"
 #     " a peon, a canal: Panama!")
+
+
+
+
+
+
+
+def counter(func):
+    """
+    Декоратор, считающий и выводящий количество вызовов
+    декорируемой функции.
+    """
+    count = 0
+
+    def wrapper(*args, **kwargs):
+        nonlocal count
+        count += 1
+        # res = func(*args, **kwargs)
+        print("функция - '{0}' была вызвана: {1} раз(а)".format(func.__name__, count))
+        return func(*args, **kwargs)
+
+    return wrapper
+
+
+@counter
+def add(a, b):
+    print(a+b)
+
+
+
+add(4, 3)
+
+
+
+
+
+
+
+
+
+
+
+
+
