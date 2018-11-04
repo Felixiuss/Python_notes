@@ -136,6 +136,11 @@ print(obj.attribute)
 
 
 
+def palindromify(sequence):
+    return [*sequence, *reversed(sequence)]
+
+print(palindromify('hello'))
+
 
 
 
