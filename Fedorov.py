@@ -276,4 +276,78 @@ def total (initial=5, *numbers, extra_number):
     print(count)
 total (10, 1, 2, 3, extra_number=50)
 # total (10, 1, 2, 3)  - вызовет ошибку
+print()
 
+# ----------------------------------------------------------------------------------------------------------------------
+"""ИСКЛЮЧЕНИЯ"""
+print('ИСКЛЮЧЕНИЯ')
+'''
+try:
+    x = int(input("Введите число: "))
+    print(5/x)
+except ZeroDivisionError as z:
+    print("Обрабатываем исключение - деление на нуль!")
+    print(z)  # выводим на экран информацию об исключении ZeroDivisionError
+except ValueError as v:
+    print("Обрабатываем исключение - преобразование типов!")
+    print(v)
+else:
+    print("Выполняется, если не произошло исключительных ситуаций!")
+finally:
+    print("Выполняется всегда и в последнюю очередь!")
+
+
+def list_find(lst, target):
+    try:
+        index = lst.index(target)
+    except ValueError:
+    ## ValueError: value is not in list
+        index = -1
+    return index
+print(list_find([3,5,6,7], -6))
+'''
+print()
+# ----------------------------------------------------------------------------------------------------------------------
+"""Менеджеры контекста"""
+print('МЕНЕДЖЕРЫ КОНТЕКСТА\n')
+
+import urllib.request
+url = "http://dfedorov.spb.ru/python3/src/romeo.txt"
+with urllib.request.urlopen(url) as webpage:
+    for line in webpage:
+        line = line.strip()
+        line = line.decode('utf-8')  # преобразуем тип bytes в utf-8
+        print(line)
+
+print()
+
+# ----------------------------------------------------------------------------------------------------------------------
+"""Классы"""
+
+print('PROPERTY\n')
+
+class Dog():
+
+    __addr = 'hello'
+
+    def __init__(self, input_name):
+        self.__hidden_name = input_name
+
+    @property
+    def name(self):     # getter
+        print('внутри getter')
+        password = int(input('Type password: '))
+        if password == 123:
+            return self.__hidden_name
+        else:
+            return 'wrong password'
+
+    @name.setter        # setter
+    def name(self, input_name):
+        print('внутри setter')
+        self.__hidden_name = input_name
+
+
+
+d = Dog('jecki')
+print(d.name)
