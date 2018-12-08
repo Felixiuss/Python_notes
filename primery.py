@@ -62,7 +62,19 @@
 # del car
 
 
-f = open('text.txt')
-for line in f:
-    print(line)
+# f = open('text.txt')
+# for line in f:
+#     print(line)
 
+t = ('1', '2', '3', 'hello', 'world', 'egg', 'foo', 'spam')
+a = slice(3)
+print(t[a])
+print(t[:3])
+
+xs = []
+def f():
+    xs.append(42)
+
+
+print(f())
+print(xs)
