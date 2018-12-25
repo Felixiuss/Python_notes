@@ -1,10 +1,13 @@
 # -*- coding: utf-8 -*-
+import unittest
 
 """ Список задач
 
-    01. Подсчитать количество символов в строке (реализация ф-и len())
+    01. Вывести количество наиболее частого символа в строке: "afCgGtkgttat" == 4
     02. Перевести переданную в функцию строку в верхний регистр, если строка содержит больше двух заглавных символа в первых четырех символах.
-    03. Функция принимающая тег и строку и возвращает слово обернутое в тег.
+    03. Дан текст, который содержит различные английские буквы и знаки препинания. Вам необходимо найти самую частую букву в тексте. Результатом должна быть буква в нижнем регистре.
+            При поиске самой частой буквы, регистр не имеет значения, так что при подсчете считайте, что "A" == "a". Убедитесь, что вы не считайте знаки препинания, цифры и пробелы, а только буквы.
+            Если в тексте две и больше буквы с одинаковой частотой, тогда результатом будет буква, которая идет первой в алфавите. Для примера, "one" содержит "o", "n", "e" по одному разу, так что мы выбираем "e".
     04. Функция принимает строку и возвращает копию двух последних символов умноженых на 4
     05. Функция принимает строку и если длина строки больше трех символов возвращает первые три символа иначе всю строку
     06. Функция для получения первой половины преданной строки.
@@ -17,13 +20,23 @@
     13. Функция принимает две строки: 'abc' , 'xyz' и после манипуляции возвращает одну строку 'xyc abz'
     14. Функция принимет строку и суффикс - вернуть новую строку без суффикса. Второй вариант - тоже но с префиксом
     15. Убрать из строки гласные буквы.
-    16. Стефан и София забывают о безопасности и используют простые пароли для всего. Помогите Николе разработать модуль для проверки паролей на безопасность. Пароль считается достаточно стойким, если его длина больше или равна 10 символам, он содержит, как минимум одну цифру, одну букву в верхнем и одну в нижнем регистре. Пароль может содержать только латинские буквы и/или цифры.
+    16. Стефан и София забывают о безопасности и используют простые пароли для всего. Помогите Николе разработать модуль для проверки паролей на безопасность. Пароль считается достаточно стойким, 
+            если его длина больше или равна 10 символам, он содержит, как минимум одну цифру, одну букву в верхнем и одну в нижнем регистре. Пароль может содержать только латинские буквы и/или цифры.
     17. Из последовательности '1010010100010000100101000100000100101000' извлечь наибольшую последовательность '0' между единицами - включая единицы ('10000...01')
     18. Посчитать количество строчных (маленьких) и прописных (больших) букв в введенной строке. Учитывать только английские буквы.
     19. Вводятся строки. Определить самую длинную строку и вывести ее номер на экран. Если самых длинных строк несколько, то вывести номера всех таких строк.
     20. Найти в строке указанную подстроку и заменить ее на новую. Строку, ее подстроку для замены и новую подстроку вводит пользователь.
     21. Вводится строка. Требуется удалить из нее повторяющиеся символы и все пробелы. Например, если было введено "abc cde def", то должно быть выведено "abcdef".
     22. Вводится строка. Удалить из нее все пробелы. После этого определить, является ли она палиндромом (перевертышем), т.е. одинаково пишется как с начала, так и с конца.
+    23. Вводится ненормированная строка, у которой могут быть пробелы в начале, в конце и между словами более одного пробела. Привести ее к нормированному виду, т.е. удалить все пробелы в начале и конце, а между словами оставить только один пробел.
+    24. Вам предлагается некоторый текст, который может содержать осмысленные слова. Вы должны подсчитать количество таких слов в этом тексте. Слово может стоять отдельно, 
+            а может присутствовать как часть другого слова. Регистр букв не имеет значения. Слова даны в нижнем регистре и не повторяются. Если слово встречается в тексте несколько раз, 
+            оно должно быть посчитано только один раз. Например, текст "How aresjfhdskfhskd you?", слова - ("how", "are", "you", "hello"). Результат должен быть равен 3.
+    25. Вам необходимо найти длину самой длинной подстроки, которая состоит из одинаковых букв. Например, строка "aaabbcaaaa" состоит из четырех подстрок с одинаковыми буквами "aaa", "bb","c" и "aaaa". Последняя подстрока является самой длинной, что и делает ее ответом.
+    26. Написать алгоритм сжатия, который сжимает повторяющиеся символы в строке. Кодирование осуществляется следующим образом:
+        s = 'aaaabbсaa' преобразуется в 'a4b2с1a2', то есть группы одинаковых символов исходной строки заменяются на этот символ и количество его повторений в этой позиции строки. Кодирование должно учитывать регистр символов.
+    27. Реализация шифра Цезаря v2
+    28. проверка защищенности пешки в шахматах  https://py.checkio.org/ru/mission/pawn-brotherhood/
 
 """
 
@@ -110,14 +123,12 @@ dct = {'x': 0, 'y': 10}
 
 # ----------------------------------------------------------------------------------------------------------------------
 """01"""
-# def string_length(st):
-#     count = 0
-#     for char in st:
-#         count += 1
-#     return count
+# string = "aCgGtgttat"
 #
-# print(string_length('helloworldhelloworld.com'))
-# print(len('helloworldhelloworld.com'))
+# res = []
+# for i in string:
+#     res.append(string.count(i))
+# print(max(res))
 """02"""
 # def to_uppercase(st):
 #     num_upper = 0
@@ -131,11 +142,38 @@ dct = {'x': 0, 'y': 10}
 # print(to_uppercase('Python'))
 # print(to_uppercase('PyThon'))
 """03"""
-# def add_tags(tag, words):
-#     return '<{0}>{1}</{0}>'.format(tag, words)
-#
-# print(add_tags('i', 'hello'))
-# print(add_tags('b', 'world'))
+# def checkio(text: str) -> str:
+#     text = text.lower()
+#     res = {}
+#     res = {i: text.count(i) for i in text if i not in res and i.isalpha()}
+#     rest = sorted(res.items(), key=lambda x: x[1])
+#     result = []
+#     [result.append(i[0]) for i in rest if i[1] == rest[-1][1]]
+#     return min(result)
+
+
+# def checkio(text: str) -> str:
+#     from collections import Counter
+#     c = Counter(b for b in text.lower() if b.isalpha())
+#     e = c.most_common(1)[0][1]
+#     return sorted(f for f in c.most_common() if f[1] == e)[0][0]
+
+
+# def checkio(text: str) -> str:
+#     import string
+#     return max(string.ascii_lowercase, key=text.lower().count)
+
+
+# if __name__ == '__main__':
+#     assert checkio("Hello World!") == "l"
+#     assert checkio("How do you do?") == "o"
+#     assert checkio("One") == "e"
+#     assert checkio("Oops!") == "o"
+#     assert checkio("AAaooo!!!!") == "a"
+#     assert checkio("abe") == "a"
+#     print("Start the long test")
+#     assert checkio("a" * 9000 + "b" * 1000) == "a"
+#     print("The local tests are done.")
 """04"""
 # def insert_end(st):
 #     sub_str = st[-2:]
@@ -363,10 +401,170 @@ dct = {'x': 0, 'y': 10}
 #
 # print(is_palindrom(string))
 """23"""
+# string = ' hello  my  name is  Roma hhb  hhh  hihi hhih  hihih'
+# sf = string.strip().replace('  ', ' ')
+# print(sf)
+"""24"""
+# def count_words(s, d):
+#     res = 0
+#     sl = s.lower()
+#     for i in d:
+#         if sl.find(i) != -1:
+#             res += 1
+#     return res
+#
+#
+# print(count_words("How aresjfhdskfhskd you?", {"how", "are", "you", "hello"}))
+"""25"""
+# from itertools import groupby
+# x = ['sdsffffse', '  ', '', 'ddvvrwwwrggg', 'hhffeeeeeeuujjcndjf']
+#
+#
+# def long_repeat(line):
+#     return max(len(list(g)) for i, g in groupby(line)) if line else 0
+#
+#
+# for _ in x:
+#     print(long_repeat(_))
+
+
+# второй вариант (не будет работать с вариантом x = '  ') ------------------------------------
+
+
+# def long_repeat(line):
+#     if not line: return 0
+#     line += ' '
+#     res = []
+#     count = 1
+#
+#     for i in range(len(line) - 1):
+#         if line[i] == line[i + 1]:
+#             count += 1
+#             continue
+#         res.append(count)
+#         count = 1
+#     return max(res)
+#
+#
+# x = ['sdsffffse', '', 'ddvvrwwwrggg', 'hhffeeeeeeuujjcndjf']
+#
+# for _ in x:
+#     print(long_repeat(_))
+
+# третий вариант (не будет работать с вариантом x = '  ') ------------------------------------
+
+
+# def long_repeat(line):
+#     if not line: return 0
+#     genome = line + ' '
+#     res = []
+#     s = 0
+#     n = genome[0]
+#     for i in genome:
+#         if n != i:
+#             res.append(s)
+#             s = 0
+#             n = i
+#         s += 1
+#     return max(res)
+#
+# x = ['sdsffffse', '', 'ddvvrwwwrggg', 'hhffeeeeeeuujjcndjf']
+#
+# for _ in x:
+#     print(long_repeat(_))
+"""26"""
+# string = ['aaaabbсaa', 'nnHHssKKKrrBBJJJ', '11KKjjHHHoOOODd^^77^']
+#
+#
+# def genome(line):
+#
+#     line += ' '
+#     s = 0
+#     n = line[0]
+#     result = ''
+#
+#     for i in line:
+#         if n != i:
+#             result += n + str(s)
+#             s = 0
+#             n = i
+#         s += 1
+#     return result
+#
+#
+# for i in string:
+#     print(genome(i))
+"""27"""
+# def to_encrypt(text: str, delta: int) -> str:
+#
+#     result = ''
+#
+#     for i in text:
+#         if 'a' <= i <= 'z':
+#             c = chr((ord(i) + delta - ord('a')) % 26 + ord('a'))
+#             # c = chr(ord('a') + (ord(i) - ord('a') + delta) % 26)
+#             result += c
+#         else:
+#             result += i
+#
+#     return result
+#
+#
+# class MyTest(unittest.TestCase):
+#     def test(self):
+#         self.assertEqual(to_encrypt("a b c", 3), "d e f")
+#         self.assertEqual(to_encrypt("a b c", -3), "x y z")
+#         self.assertEqual(to_encrypt("simple text", 16), "iycfbu junj")
+#         self.assertEqual(to_encrypt("important text", 10), "swzybdkxd dohd")
+#         self.assertEqual(to_encrypt("state secret", -13), "fgngr frperg")
+#
+#
+# if __name__ == '__main__':
+#     unittest.main()
+"""28"""
+def safe_pawns(pawns: set) -> int:
+    res = 0
+
+    for i in pawns:
+        pos1: str = chr(ord(i[0])-1) + str(int(i[1]) - 1)
+        pos2: str = chr(ord(i[0])+1) + str(int(i[1]) - 1)
+        if pos1 in pawns or pos2 in pawns:
+            res += 1
+
+    return res
+
+
+class MyTest(unittest.TestCase):
+    def test(self):
+        self.assertEqual(safe_pawns({"b4", "d4", "f4", "c3", "e3", "g5", "d2"}), 6)
+        self.assertEqual(safe_pawns({"b4", "c4", "d4", "e4", "f4", "g4", "e5"}), 1)
+
+
+if __name__ == '__main__':
+    unittest.main()
 
 
 
 
+
+''
+# class MyTest(unittest.TestCase):
+#     def test(self):
+#         self.assertEqual(safe_pawns({"b4", "d4", "f4", "c3", "e3", "g5", "d2"}), 6)
+#         self.assertEqual(safe_pawns({"b4", "c4", "d4", "e4", "f4", "g4", "e5"}), 1)
+        # self.assertEqual(to_encrypt("simple text", 16), "iycfbu junj")
+        # self.assertEqual(to_encrypt("important text", 10), "swzybdkxd dohd")
+        # self.assertEqual(to_encrypt("state secret", -13), "fgngr frperg")
+        #
+        #
+        # self.assertTrue(checkio('abe'))  # на булевое значение
+        #
+        # self.assertRaises(TypeError, checkio, 'kkkk', 8)  # на выброс исключения TypeError
+        # self.assertGreater(checkio("Bananas, give me bananas!!!", {"banana", "bananas"}), 1)  # на больше чем (a > b)
+
+
+# if __name__ == '__main__':
+#     unittest.main()
 
 
 """
@@ -380,16 +578,5 @@ def test():
     assert find_long_worlds('test') != ([1], ['hello'])
 
 
-# unittest
-import unittest
 
-class TestHomework(unittest.TestCase):
-
-    def test_rle(self):
-        self.assertEqual(find_long_worlds('hello hgjfur, world roma, andrey sergey'), ([1, 4, 5], ['hgjfur', 'andrey', 'sergey']))
-        self.assertNotEqual(find_long_worlds('24, 4, 3, 5, 7,'), ([1], ['24']))
-
-
-if __name__ == '__main__':
-    unittest.main()
 """

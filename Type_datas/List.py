@@ -11,7 +11,9 @@
     05. Функция f(list, min, max) - вернуть количество элементов из списка которые находятся в диапазоне min и max
     06. Функция f(n, str) - вернуть список сторок, которые больше чем аргумент n. Если в строке есть запятые, они должны
         быть удалены.
-    07.
+    07. Определить, все ли элементы массива равны. all_the_same([1, 1, 1]) == True ; all_the_same([1, 2, 1]) == False
+    08. Распаковать последовательность произвольной глубины вложенности в одномерную.
+    09.
 """
 """
 '''Примеры создания списков'''
@@ -197,31 +199,81 @@ print(students1)
 # s = 'The quick brown fox, jumps over tne, lazy dog'
 # print(s.replace(',', '').split(' '))
 """07"""
+# def all_the_same(lst):
+#     return len(lst) == 0 or lst.count(lst[0]) == len(lst)
+
+
+# if __name__ == '__main__':
+#     print("Example:")
+#     print(all_the_same([1, 1, 1]))
+#     assert all_the_same([1, 1, 1]) == True
+#     assert all_the_same([1, 2, 1]) == False
+#     assert all_the_same(['a', 'a', 'a']) == True
+#     assert all_the_same([]) == True
+#     assert all_the_same([1]) == True
+#     print("Coding complete? Click 'Check' to earn cool rewards!")
+"""08"""
+# def flatten(L):
+#     """распаковка колекции произвольной вложенности в одномерный массив"""
+#     rest = []
+#     for x in L:
+#         rest.append(x) if not isinstance(x, (list, tuple)) else rest.extend(flatten(x))
+#     return rest
+#
+#
+# def flatten(seq):
+#
+#     result = []
+#
+#     def seq_expand(new_seq):
+#         for new_item in new_seq:
+#             if isinstance(new_item, (tuple, list)):
+#                 return seq_expand(new_item)
+#             else:
+#                 result.append(new_item)
+#
+#     for item in seq:
+#         if isinstance(item, (tuple, list)):
+#             if seq_expand(item):
+#                 result.append(seq_expand(item))
+#         else:
+#             result.append(item)
+#
+#     return result
+#
+#
+# print(flatten([1, [2, [3, 4], 5], [], 6, [7, 8], 4, [55, [66, 77], 88], 99, [70, 85]]))
+# print(flatten((1, (2, (3, 4), 5), 6, (7, 8), (), 4, (55, (66, 77), 88), 99, (70, 85))))
+# print(sum(flatten((1, (2, (3, 4), 5), 6, (7, 8), (), 4, (55, (66, 77), 88), 99, (70, 85)))))
+"""09"""
 
 
 
-def sub_list(my_list):
-    subs = [[]]
-
-    for i in range(len(my_list)):
-        n = i+1
-
-        while n <= len(my_list):
-            sub = my_list[i:n]
-            subs.append(sub)
-            n += 1
-
-        return subs
-
-
-l1 = [10, 20, 30, 40]
-print(sub_list(l1))
 
 
 
-t = (1, 2, 3)
-t = (4,) + t[1:]
-print(t)
+# def sub_list(my_list):
+#     subs = [[]]
+#
+#     for i in range(len(my_list)):
+#         n = i+1
+#
+#         while n <= len(my_list):
+#             sub = my_list[i:n]
+#             subs.append(sub)
+#             n += 1
+#
+#         return subs
+#
+#
+# l1 = [10, 20, 30, 40]
+# print(sub_list(l1))
+#
+#
+#
+# t = (1, 2, 3)
+# t = (4,) + t[1:]
+# print(t)
 
 
 
